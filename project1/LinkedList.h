@@ -25,7 +25,7 @@ private:
     Node<ItemType>* headPtr; // Pointer to first node in the chain;
     // (contains the first entry in the list)
     int itemCount;           // Current count of list items
-    
+
     // Locates a specified node in this linked list.
     // @pre  position is the number of the desired node;
     //       position >= 1 and position <= itemCount.
@@ -33,22 +33,23 @@ private:
     // @param position  The number of the node to locate.
     // @return  A pointer to the node at the given position.
     Node<ItemType>* getNodeAt(int position) const;
-    
+
 public:
     LinkedList();
     LinkedList(const LinkedList<ItemType>& aList);
     virtual ~LinkedList();
-    
+
     bool isEmpty() const;
     int getLength() const;
     bool insert(int newPosition, const ItemType& newEntry);
+    Node<ItemType>* insertNode(int position, Node<ItemType>* newNodePtr, Node<ItemType>* subChainPtr);
     bool remove(int position);
     void clear();
-    
+
     /** @throw PrecondViolatedExcept if position < 1 or
      position > getLength(). */
     ItemType getEntry(int position) const throw(PrecondViolatedExcept);
-    
+
     /** @throw PrecondViolatedExcept if position < 1 or
      position > getLength(). */
     void replace(int position, const ItemType& newEntry)
