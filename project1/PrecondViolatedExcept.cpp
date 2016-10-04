@@ -1,8 +1,17 @@
+/**
+ * @file PrecondViolatedExcept.cpp
+ *
+ * @brief Implementation file for the PrecondViolatedExcept class
+ *
+ * @author Someone at Pearson (I didn't code any of this)
+ *
+ * @details Specifies function of the class.
+ *
+ * @version 0.10
+ *
+ */
 //  Created by Frank M. Carrano and Timothy M. Henry.
 //  Copyright (c) 2017 Pearson Education, Hoboken, New Jersey.
-
-/** Listing 7-6.
- @file PrecondViolatedExcept.cpp */
 
 #include "PrecondViolatedExcept.h"
 

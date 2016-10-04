@@ -1,3 +1,16 @@
+/**
+ * @file LinkedList.cpp
+ *
+ * @brief Implementation file for the Linked List ADT
+ *
+ * @author Someone at Pearson (I didn't code any of this)
+ *
+ * @details Specifies the functions of the linked list data type
+ *
+ * @version 0.10
+ *
+ */
+
 #include "LinkedList.h"
 #include "Node.h"
 #include "assert.h"
