@@ -28,6 +28,22 @@ int main() {
         cout << "Cannot open thousand integer file";
     }
 
+    /* get the 10,000 random numbers */
+    int randTenThousand[10000];
+    ifstream tenThousandFile("rand_10,000");
+    if (tenThousandFile.is_open()) {
+        int number; // holds number on each line
+        int counter = 0; // increment throught randThousand array
+        while(tenThousandFile >> number) {
+            // cout << counter << ": " << number << endl;
+            randTenThousand[counter] = number; // add it to array
+            counter++;
+        }
+        tenThousandFile.close();
+    } else {
+        cout << "Cannot open thousand integer file";
+    }
+
 
     /*
         Just have a table listing timing of each algorithm for each run of
@@ -58,8 +74,8 @@ int main() {
     long totalComparisonCount;
 
     for (int i = 0; i < 10; i++) {
-        Merge merge = Merge(randThousand, 1000); // sort random array using merge sort
-        merge.sort(0, 999);
+        Merge merge = Merge(randTenThousand, 10000); // sort random array using merge sort
+        merge.sort(0, 10000-1);
         totalCPUTime += merge.timePassed();
         cout << "[" << i+1 << "]" << endl << merge  << "------------------------" << endl;
     }
