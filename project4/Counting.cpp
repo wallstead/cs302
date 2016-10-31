@@ -44,10 +44,6 @@ void Counting::sort() {
     elapsedTime = double(finish - start); // set elapsed CPU time
 }
 
-double Counting::timePassed() {
-    return elapsedTime;
-}
-
 ostream& operator<<(ostream& out, const Counting& Counting) {
     /* print contents of array (debug only) */
     // for (int i = 0; i < Counting.count; i++) {

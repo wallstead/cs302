@@ -11,11 +11,9 @@ public:
     Merge(int toSort[], long count);
     void merge(long first, long mid, long last);
     void sort(long first, long last);
-    double timePassed();
 
     friend ostream& operator<<(ostream& out, const Merge& merge);
 
-private:
     int count;
     int *data;
     double elapsedTime; // CPU time specifically

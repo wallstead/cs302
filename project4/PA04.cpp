@@ -84,9 +84,7 @@ int main() {
         10 runs. Do this for every algorithm.
     */
 
-    /* run bubble sort 10 times for 1,000 random numbers, average totals */
-
-    /* Working Bubble Sort */
+    /* Bubble Sort */
     cout << "---BUBBLE SORT (1,000 unsorted)---" << endl;
 
     unsigned long totalCPUTime = 0;
@@ -218,6 +216,278 @@ int main() {
         totalComparisonCount += bubble.comparisonCount;
         totalSwapCount += bubble.swapCount;
         cout << "[" << i << "] --- CPU Time: " << bubble.elapsedTime  << "" << endl;
+    }
+    cout << "Average elapsed CPU time: " << long(totalCPUTime/10) << endl;
+    cout << "Average comparison count: " << long(totalComparisonCount/10) << endl;
+    cout << "      Average swap count: " << long(totalSwapCount/10) << endl;
+    cout << "--------------------------------" << endl;
+
+    /* Merge Sort */
+    cout << "---MERGE SORT (1,000 unsorted)---" << endl;
+
+    /* reset these */
+    totalCPUTime = 0;
+    totalComparisonCount = 0;
+    totalSwapCount = 0;
+
+    for (int i = 0; i < 10; i++) {
+        Merge merge = Merge(randThousand, 1000); // sort random array using merge sort
+        merge.sort(0, 1000-1);
+        totalCPUTime += merge.elapsedTime;
+        totalComparisonCount += merge.comparisonCount;
+        totalSwapCount += merge.swapCount;
+        cout << "[" << i << "] --- CPU Time: " << merge.elapsedTime  << "" << endl;
+        if (i == 0) { // save one of the sorted lists for use later
+            for (int i = 0; i < 1000; i++) {
+                sortedThousand[i] = merge.data[i];
+            }
+        }
+    }
+    cout << "Average elapsed CPU time: " << long(totalCPUTime/10) << endl;
+    cout << "Average comparison count: " << long(totalComparisonCount/10) << endl;
+    cout << "      Average swap count: " << long(totalSwapCount/10) << endl;
+    cout << "--------------------------------" << endl;
+
+    cout << "---MERGE SORT (1,000 sorted)---" << endl;
+
+    /* reset these */
+    totalCPUTime = 0;
+    totalComparisonCount = 0;
+    totalSwapCount = 0;
+
+    for (int i = 0; i < 10; i++) {
+        Merge merge = Merge(sortedThousand, 1000); // sort sorted array using merge sort
+        merge.sort(0, 1000-1);
+        totalCPUTime += merge.elapsedTime;
+        totalComparisonCount += merge.comparisonCount;
+        totalSwapCount += merge.swapCount;
+        cout << "[" << i << "] --- CPU Time: " << merge.elapsedTime  << "" << endl;
+    }
+    cout << "Average elapsed CPU time: " << long(totalCPUTime/10) << endl;
+    cout << "Average comparison count: " << long(totalComparisonCount/10) << endl;
+    cout << "      Average swap count: " << long(totalSwapCount/10) << endl;
+    cout << "--------------------------------" << endl;
+
+    cout << "---MERGE SORT (10,000 unsorted)---" << endl;
+
+    /* reset these */
+    totalCPUTime = 0;
+    totalComparisonCount = 0;
+    totalSwapCount = 0;
+
+    for (int i = 0; i < 10; i++) {
+        Merge merge = Merge(randTenThousand, 10000); // sort random array using merge sort
+        merge.sort(0, 10000-1);
+        totalCPUTime += merge.elapsedTime;
+        totalComparisonCount += merge.comparisonCount;
+        totalSwapCount += merge.swapCount;
+        cout << "[" << i << "] --- CPU Time: " << merge.elapsedTime  << "" << endl;
+        if (i == 0) { // save one of the sorted lists for use later
+            for (int i = 0; i < 10000; i++) {
+                sortedTenThousand[i] = merge.data[i];
+            }
+        }
+    }
+    cout << "Average elapsed CPU time: " << long(totalCPUTime/10) << endl;
+    cout << "Average comparison count: " << long(totalComparisonCount/10) << endl;
+    cout << "      Average swap count: " << long(totalSwapCount/10) << endl;
+    cout << "--------------------------------" << endl;
+
+    cout << "---MERGE SORT (10,000 sorted)---" << endl;
+
+    /* reset these */
+    totalCPUTime = 0;
+    totalComparisonCount = 0;
+    totalSwapCount = 0;
+
+    for (int i = 0; i < 10; i++) {
+        Merge merge = Merge(sortedTenThousand, 10000); // sort sorted array using merge sort
+        merge.sort(0, 10000-1);
+        totalCPUTime += merge.elapsedTime;
+        totalComparisonCount += merge.comparisonCount;
+        totalSwapCount += merge.swapCount;
+        cout << "[" << i << "] --- CPU Time: " << merge.elapsedTime  << "" << endl;
+    }
+    cout << "Average elapsed CPU time: " << long(totalCPUTime/10) << endl;
+    cout << "Average comparison count: " << long(totalComparisonCount/10) << endl;
+    cout << "      Average swap count: " << long(totalSwapCount/10) << endl;
+    cout << "--------------------------------" << endl;
+
+    cout << "---MERGE SORT (100,000 unsorted)---" << endl;
+
+    /* reset these */
+    totalCPUTime = 0;
+    totalComparisonCount = 0;
+    totalSwapCount = 0;
+
+    for (int i = 0; i < 10; i++) {
+        Merge merge = Merge(randHundredThousand, 100000); // sort random array using merge sort
+        merge.sort(0, 100000-1);
+        totalCPUTime += merge.elapsedTime;
+        totalComparisonCount += merge.comparisonCount;
+        totalSwapCount += merge.swapCount;
+        cout << "[" << i << "] --- CPU Time: " << merge.elapsedTime  << "" << endl;
+        if (i == 0) { // save one of the sorted lists for use later
+            for (int i = 0; i < 100000; i++) {
+                sortedHundredThousand[i] = merge.data[i];
+            }
+        }
+    }
+    cout << "Average elapsed CPU time: " << long(totalCPUTime/10) << endl;
+    cout << "Average comparison count: " << long(totalComparisonCount/10) << endl;
+    cout << "      Average swap count: " << long(totalSwapCount/10) << endl;
+    cout << "--------------------------------" << endl;
+
+    cout << "---MERGE SORT (100,000 sorted)---" << endl;
+
+    /* reset these */
+    totalCPUTime = 0;
+    totalComparisonCount = 0;
+    totalSwapCount = 0;
+
+    for (int i = 0; i < 10; i++) {
+        Merge merge = Merge(sortedHundredThousand, 100000); // sort sorted array using merge sort
+        merge.sort(0, 100000-1);
+        totalCPUTime += merge.elapsedTime;
+        totalComparisonCount += merge.comparisonCount;
+        totalSwapCount += merge.swapCount;
+        cout << "[" << i << "] --- CPU Time: " << merge.elapsedTime  << "" << endl;
+    }
+    cout << "Average elapsed CPU time: " << long(totalCPUTime/10) << endl;
+    cout << "Average comparison count: " << long(totalComparisonCount/10) << endl;
+    cout << "      Average swap count: " << long(totalSwapCount/10) << endl;
+    cout << "--------------------------------" << endl;
+
+    /* Counting Sort */
+    cout << "---COUNTING SORT (1,000 unsorted)---" << endl;
+
+    /* reset these */
+    totalCPUTime = 0;
+    totalComparisonCount = 0;
+    totalSwapCount = 0;
+
+    for (int i = 0; i < 10; i++) {
+        Counting counting = Counting(randThousand, 1000); // sort random array using counting sort
+        counting.sort();
+        totalCPUTime += counting.elapsedTime;
+        totalComparisonCount += counting.comparisonCount;
+        totalSwapCount += counting.swapCount;
+        cout << "[" << i << "] --- CPU Time: " << counting.elapsedTime  << "" << endl;
+        if (i == 0) { // save one of the sorted lists for use later
+            for (int i = 0; i < 1000; i++) {
+                sortedThousand[i] = counting.data[i];
+            }
+        }
+    }
+    cout << "Average elapsed CPU time: " << long(totalCPUTime/10) << endl;
+    cout << "Average comparison count: " << long(totalComparisonCount/10) << endl;
+    cout << "      Average swap count: " << long(totalSwapCount/10) << endl;
+    cout << "--------------------------------" << endl;
+
+    cout << "---COUNTING SORT (1,000 sorted)---" << endl;
+
+    /* reset these */
+    totalCPUTime = 0;
+    totalComparisonCount = 0;
+    totalSwapCount = 0;
+
+    for (int i = 0; i < 10; i++) {
+        Counting counting = Counting(sortedThousand, 1000); // sort sorted array using counting sort
+        counting.sort();
+        totalCPUTime += counting.elapsedTime;
+        totalComparisonCount += counting.comparisonCount;
+        totalSwapCount += counting.swapCount;
+        cout << "[" << i << "] --- CPU Time: " << counting.elapsedTime  << "" << endl;
+    }
+    cout << "Average elapsed CPU time: " << long(totalCPUTime/10) << endl;
+    cout << "Average comparison count: " << long(totalComparisonCount/10) << endl;
+    cout << "      Average swap count: " << long(totalSwapCount/10) << endl;
+    cout << "--------------------------------" << endl;
+
+    cout << "---COUNTING SORT (10,000 unsorted)---" << endl;
+
+    /* reset these */
+    totalCPUTime = 0;
+    totalComparisonCount = 0;
+    totalSwapCount = 0;
+
+    for (int i = 0; i < 10; i++) {
+        Counting counting = Counting(randTenThousand, 10000); // sort random array using counting sort
+        counting.sort();
+        totalCPUTime += counting.elapsedTime;
+        totalComparisonCount += counting.comparisonCount;
+        totalSwapCount += counting.swapCount;
+        cout << "[" << i << "] --- CPU Time: " << counting.elapsedTime  << "" << endl;
+        if (i == 0) { // save one of the sorted lists for use later
+            for (int i = 0; i < 10000; i++) {
+                sortedTenThousand[i] = counting.data[i];
+            }
+        }
+    }
+    cout << "Average elapsed CPU time: " << long(totalCPUTime/10) << endl;
+    cout << "Average comparison count: " << long(totalComparisonCount/10) << endl;
+    cout << "      Average swap count: " << long(totalSwapCount/10) << endl;
+    cout << "--------------------------------" << endl;
+
+    cout << "---COUNTING SORT (10,000 sorted)---" << endl;
+
+    /* reset these */
+    totalCPUTime = 0;
+    totalComparisonCount = 0;
+    totalSwapCount = 0;
+
+    for (int i = 0; i < 10; i++) {
+        Counting counting = Counting(sortedTenThousand, 10000); // sort sorted array using counting sort
+        counting.sort();
+        totalCPUTime += counting.elapsedTime;
+        totalComparisonCount += counting.comparisonCount;
+        totalSwapCount += counting.swapCount;
+        cout << "[" << i << "] --- CPU Time: " << counting.elapsedTime  << "" << endl;
+    }
+    cout << "Average elapsed CPU time: " << long(totalCPUTime/10) << endl;
+    cout << "Average comparison count: " << long(totalComparisonCount/10) << endl;
+    cout << "      Average swap count: " << long(totalSwapCount/10) << endl;
+    cout << "--------------------------------" << endl;
+
+    cout << "---COUNTING SORT (100,000 unsorted)---" << endl;
+
+    /* reset these */
+    totalCPUTime = 0;
+    totalComparisonCount = 0;
+    totalSwapCount = 0;
+
+    for (int i = 0; i < 10; i++) {
+        Counting counting = Counting(randHundredThousand, 100000); // sort random array using counting sort
+        counting.sort();
+        totalCPUTime += counting.elapsedTime;
+        totalComparisonCount += counting.comparisonCount;
+        totalSwapCount += counting.swapCount;
+        cout << "[" << i << "] --- CPU Time: " << counting.elapsedTime  << "" << endl;
+        if (i == 0) { // save one of the sorted lists for use later
+            for (int i = 0; i < 100000; i++) {
+                sortedHundredThousand[i] = counting.data[i];
+            }
+        }
+    }
+    cout << "Average elapsed CPU time: " << long(totalCPUTime/10) << endl;
+    cout << "Average comparison count: " << long(totalComparisonCount/10) << endl;
+    cout << "      Average swap count: " << long(totalSwapCount/10) << endl;
+    cout << "--------------------------------" << endl;
+
+    cout << "---COUNTING SORT (100,000 sorted)---" << endl;
+
+    /* reset these */
+    totalCPUTime = 0;
+    totalComparisonCount = 0;
+    totalSwapCount = 0;
+
+    for (int i = 0; i < 10; i++) {
+        Counting counting = Counting(sortedHundredThousand, 100000); // sort sorted array using counting sort
+        counting.sort();
+        totalCPUTime += counting.elapsedTime;
+        totalComparisonCount += counting.comparisonCount;
+        totalSwapCount += counting.swapCount;
+        cout << "[" << i << "] --- CPU Time: " << counting.elapsedTime  << "" << endl;
     }
     cout << "Average elapsed CPU time: " << long(totalCPUTime/10) << endl;
     cout << "Average comparison count: " << long(totalComparisonCount/10) << endl;

@@ -87,10 +87,6 @@ void Merge::sort(long first, long last) {
     elapsedTime = double(finish - start); // set elapsed CPU time
 }
 
-double Merge::timePassed() {
-    return elapsedTime;
-}
-
 ostream& operator<<(ostream& out, const Merge& merge) {
     /* print contents of array (debug only) */
     // for (int i = 0; i < merge.count; i++) {

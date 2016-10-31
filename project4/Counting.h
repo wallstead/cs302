@@ -10,11 +10,9 @@ class Counting {
 public:
     Counting(int toSort[], int count);
     void sort();
-    double timePassed();
 
     friend ostream& operator<<(ostream& out, const Counting& Counting);
 
-private:
     int count;
     int *countingArray;
     int *data;
