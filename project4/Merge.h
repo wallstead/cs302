@@ -8,9 +8,9 @@ using namespace std;
 
 class Merge {
 public:
-    Merge(int toSort[], int count);
-    void merge(int first, int mid, int last);
-    void sort(int first, int last);
+    Merge(int toSort[], long count);
+    void merge(long first, long mid, long last);
+    void sort(long first, long last);
     double timePassed();
 
     friend ostream& operator<<(ostream& out, const Merge& merge);
