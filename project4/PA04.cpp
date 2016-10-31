@@ -87,17 +87,142 @@ int main() {
     /* run bubble sort 10 times for 1,000 random numbers, average totals */
 
     /* Working Bubble Sort */
-    // long totalCPUTime = 0;
-    // long totalSwapCount;
-    // long totalComparisonCount;
-    //
-    // for (int i = 0; i < 10; i++) {
-    //     Bubble bubble = Bubble(randTenThousand, 10000); // sort random array using bubble sort
-    //     bubble.sort();
-    //     totalCPUTime += bubble.timePassed();
-    //     cout << "[" << i+1 << "]" << endl << bubble  << "------------------------" << endl;
-    // }
-    // cout << "Average elapsed CPU time: " << long(totalCPUTime/10) << endl;
+    cout << "---BUBBLE SORT (1,000 unsorted)---" << endl;
+
+    unsigned long totalCPUTime = 0;
+    unsigned long totalComparisonCount = 0;
+    unsigned long totalSwapCount = 0;
+    int sortedThousand[1000];
+
+    for (int i = 0; i < 10; i++) {
+        Bubble bubble = Bubble(randThousand, 1000); // sort random array using bubble sort
+        bubble.sort();
+        totalCPUTime += bubble.elapsedTime;
+        totalComparisonCount += bubble.comparisonCount;
+        totalSwapCount += bubble.swapCount;
+        cout << "[" << i << "] --- CPU Time: " << bubble.elapsedTime  << "" << endl;
+        if (i == 0) { // save one of the sorted lists for use later
+            for (int i = 0; i < 1000; i++) {
+                sortedThousand[i] = bubble.data[i];
+            }
+        }
+    }
+    cout << "Average elapsed CPU time: " << long(totalCPUTime/10) << endl;
+    cout << "Average comparison count: " << long(totalComparisonCount/10) << endl;
+    cout << "      Average swap count: " << long(totalSwapCount/10) << endl;
+    cout << "--------------------------------" << endl;
+
+    cout << "---BUBBLE SORT (1,000 sorted)---" << endl;
+
+    /* Reset these */
+    totalCPUTime = 0;
+    totalComparisonCount = 0;
+    totalSwapCount = 0;
+
+    for (int i = 0; i < 10; i++) {
+        Bubble bubble = Bubble(sortedThousand, 1000); // sort sorted array using bubble sort
+        bubble.sort();
+        totalCPUTime += bubble.elapsedTime;
+        totalComparisonCount += bubble.comparisonCount;
+        totalSwapCount += bubble.swapCount;
+        cout << "[" << i << "] --- CPU Time: " << bubble.elapsedTime  << "" << endl;
+    }
+    cout << "Average elapsed CPU time: " << long(totalCPUTime/10) << endl;
+    cout << "Average comparison count: " << long(totalComparisonCount/10) << endl;
+    cout << "      Average swap count: " << long(totalSwapCount/10) << endl;
+    cout << "--------------------------------" << endl;
+
+    cout << "---BUBBLE SORT (10,000 unsorted)---" << endl;
+
+    /* Reset these */
+    totalCPUTime = 0;
+    totalComparisonCount = 0;
+    totalSwapCount = 0;
+    int sortedTenThousand[10000];
+
+    for (int i = 0; i < 10; i++) {
+        Bubble bubble = Bubble(randTenThousand, 10000); // sort random array using bubble sort
+        bubble.sort();
+        totalCPUTime += bubble.elapsedTime;
+        totalComparisonCount += bubble.comparisonCount;
+        totalSwapCount += bubble.swapCount;
+        cout << "[" << i << "] --- CPU Time: " << bubble.elapsedTime  << "" << endl;
+        if (i == 0) { // save one of the sorted lists for use later
+            for (int i = 0; i < 10000; i++) {
+                sortedTenThousand[i] = bubble.data[i];
+            }
+        }
+    }
+    cout << "Average elapsed CPU time: " << long(totalCPUTime/10) << endl;
+    cout << "Average comparison count: " << long(totalComparisonCount/10) << endl;
+    cout << "      Average swap count: " << long(totalSwapCount/10) << endl;
+    cout << "--------------------------------" << endl;
+
+    cout << "---BUBBLE SORT (10,000 sorted)---" << endl;
+
+    /* Reset these */
+    totalCPUTime = 0;
+    totalComparisonCount = 0;
+    totalSwapCount = 0;
+
+    for (int i = 0; i < 10; i++) {
+        Bubble bubble = Bubble(sortedTenThousand, 10000); // sort sorted array using bubble sort
+        bubble.sort();
+        totalCPUTime += bubble.elapsedTime;
+        totalComparisonCount += bubble.comparisonCount;
+        totalSwapCount += bubble.swapCount;
+        cout << "[" << i << "] --- CPU Time: " << bubble.elapsedTime  << "" << endl;
+    }
+    cout << "Average elapsed CPU time: " << long(totalCPUTime/10) << endl;
+    cout << "Average comparison count: " << long(totalComparisonCount/10) << endl;
+    cout << "      Average swap count: " << long(totalSwapCount/10) << endl;
+    cout << "--------------------------------" << endl;
+
+    cout << "---BUBBLE SORT (100,000 unsorted)---" << endl;
+
+    /* Reset these */
+    totalCPUTime = 0;
+    totalComparisonCount = 0;
+    totalSwapCount = 0;
+    int sortedHundredThousand[100000];
+
+    for (int i = 0; i < 10; i++) {
+        Bubble bubble = Bubble(randHundredThousand, 100000); // sort random array using bubble sort
+        bubble.sort();
+        totalCPUTime += bubble.elapsedTime;
+        totalComparisonCount += bubble.comparisonCount;
+        totalSwapCount += bubble.swapCount;
+        cout << "[" << i << "] --- CPU Time: " << bubble.elapsedTime  << "" << endl;
+        if (i == 0) { // save one of the sorted lists for use later
+            for (int i = 0; i < 100000; i++) {
+                sortedHundredThousand[i] = bubble.data[i];
+            }
+        }
+    }
+    cout << "Average elapsed CPU time: " << long(totalCPUTime/10) << endl;
+    cout << "Average comparison count: " << long(totalComparisonCount/10) << endl;
+    cout << "      Average swap count: " << long(totalSwapCount/10) << endl;
+    cout << "--------------------------------" << endl;
+
+    cout << "---BUBBLE SORT (100,000 sorted)---" << endl;
+
+    /* Reset these */
+    totalCPUTime = 0;
+    totalComparisonCount = 0;
+    totalSwapCount = 0;
+
+    for (int i = 0; i < 10; i++) {
+        Bubble bubble = Bubble(sortedHundredThousand, 100000); // sort sorted array using bubble sort
+        bubble.sort();
+        totalCPUTime += bubble.elapsedTime;
+        totalComparisonCount += bubble.comparisonCount;
+        totalSwapCount += bubble.swapCount;
+        cout << "[" << i << "] --- CPU Time: " << bubble.elapsedTime  << "" << endl;
+    }
+    cout << "Average elapsed CPU time: " << long(totalCPUTime/10) << endl;
+    cout << "Average comparison count: " << long(totalComparisonCount/10) << endl;
+    cout << "      Average swap count: " << long(totalSwapCount/10) << endl;
+    cout << "--------------------------------" << endl;
 
     /* Not-Fully-Working Merge Sort */
     // long totalCPUTime = 0;
@@ -114,18 +239,17 @@ int main() {
 
 
     /* Not-Working Counting Sort */
-    long totalCPUTime = 0;
-    long totalSwapCount;
-    long totalComparisonCount;
-
-    for (int i = 0; i < 10; i++) {
-        Counting counting = Counting(randThousand, 1000); // sort random array using merge sort
-        counting.sort();
-        
-        totalCPUTime += counting.timePassed();
-        cout << "[" << i+1 << "]" << endl << counting  << "------------------------" << endl;
-    }
-    cout << "Average elapsed CPU time: " << double(totalCPUTime/10) << endl;
+    // long totalCPUTime = 0;
+    // long totalSwapCount;
+    // long totalComparisonCount;
+    //
+    // for (int i = 0; i < 10; i++) {
+    //     Counting counting = Counting(randThousand, 1000); // sort random array using merge sort
+    //     counting.sort();
+    //     totalCPUTime += counting.timePassed();
+    //     cout << "[" << i+1 << "]" << endl << counting  << "------------------------" << endl;
+    // }
+    // cout << "Average elapsed CPU time: " << double(totalCPUTime/10) << endl;
 
     return 0;
 }

@@ -52,10 +52,6 @@ void Bubble::sort() {
     elapsedTime = double(finish - start); // set elapsed CPU time
 }
 
-double Bubble::timePassed() {
-    return elapsedTime;
-}
-
 ostream& operator<<(ostream& out, const Bubble& bubble) {
     /* print contents of array (debug only) */
     // for (int i = 0; i < bubble.count; i++) {

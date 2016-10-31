@@ -10,11 +10,9 @@ class Bubble {
 public:
     Bubble(int toSort[], int count);
     void sort();
-    double timePassed();
 
     friend ostream& operator<<(ostream& out, const Bubble& bubble);
 
-private:
     int count;
     int *data;
     double elapsedTime; // CPU time specifically
