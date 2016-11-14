@@ -6,7 +6,9 @@
 /** ADT queue: Circular array-based implementation.
  @file ArrayQueue.cpp */
 
+#include <iostream>
 #include "ArrayQueue.h"  // Header file
+using namespace std;
 
 template<class ItemType>
 ArrayQueue<ItemType>::ArrayQueue()
@@ -51,11 +53,11 @@ bool ArrayQueue<ItemType>::dequeue()
 }  // end dequeue
 
 template<class ItemType>
-ItemType ArrayQueue<ItemType>::peekFront() const throw(PrecondViolatedExcept)
+ItemType ArrayQueue<ItemType>::peekFront() const
 {
    // Enforce precondition
    if (isEmpty())
-      throw PrecondViolatedExcept("peekFront() called with empty queue");
+      throw string("peekFront() called with empty queue");
 
    // Queue is not empty; return front
    return items[front];

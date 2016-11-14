@@ -27,7 +27,7 @@ public:
    bool enqueue(const ItemType& newEntry);
    bool dequeue();
 
-   /** @throw  PrecondViolatedExcept if queue is empty. */
-   ItemType peekFront() const throw(PrecondViolatedExcept);
+   ItemType peekFront() const;
 }; // end ArrayQueue
+#include "ArrayQueue.cpp"
 #endif

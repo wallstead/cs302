@@ -8,6 +8,12 @@ using namespace std;
 
 void populateFile(int count, std::string const& file);
 
+struct Event {
+    int startTime;
+    int duration;
+    int endTime;
+};
+
 int main() {
 
     /* Prep rand-num generator */
@@ -16,6 +22,34 @@ int main() {
     /* Populate the file with start times */
     std::string hundredThousand("events_100,000");
     populateFile(99999, hundredThousand);
+
+
+    ArrayQueue<Event> line;
+
+    /* Read file into an events array */
+    Event events[99999];
+    ifstream hundredThousandFile("events_100,000");
+    if (hundredThousandFile.is_open()) {
+        int startTime;
+        int duration;
+        int counter = 0;
+        while(hundredThousandFile >> startTime >> duration) {
+            Event event;
+            event.startTime = startTime;
+            event.duration = duration;
+            events[counter] = event; // add it to array
+
+            cout << event.startTime << " | " << event.duration << endl; // DEBUG ONLY
+            line.enqueue(event);
+            //
+            cout << line.peekFront().duration << endl;
+
+            counter++;
+        }
+        hundredThousandFile.close();
+    } else {
+        cout << "Cannot open hundred thousand integer file";
+    }
 
 
     return 0;
