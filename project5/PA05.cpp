@@ -3,7 +3,6 @@
 #include <fstream>
 #include "Merge.h"
 #include "ArrayQueue.h"
-#include "SortedList.h"
 #include "PriorityQueue.h"
 
 using namespace std;
@@ -17,7 +16,7 @@ struct Event {
     int endTime;
 
     bool operator > (const Event &rhs ) const {
-        if (startTime > rhs.startTime) {
+        if (startTime < rhs.startTime) {
             return true;
         } else {
             return false;
@@ -42,43 +41,9 @@ int main() {
     std::string hundredThousand("events_100,000");
     populateFile(99999, hundredThousand);
 
+    /* Initialize two queues */
     ArrayQueue<Event> bankLine;
-
-    SortedList<int> foo;
-    int bar1 = 1;
-    foo.insertSorted(bar1);
-    int bar2 = 3;
-    foo.insertSorted(bar2);
-    int bar3 = 2;
-    foo.insertSorted(bar3);
-    // cout << foo.getPosition(bar2) << endl;
-
-    Event event_1;
-    event_1.startTime = 0;
-    Event event_2;
-    event_2.startTime = 2;
-    Event event_3;
-    event_3.startTime = 1;
-
-
-
-    PriorityQueue<Event> bar;
-    bar.enqueue(event_1);
-    bar.enqueue(event_2);
-    bar.enqueue(event_3);
-    cout << bar.peek().startTime << endl;
-    // bar.enqueue(1);
-    // bar.enqueue(2);
-    // bar.enqueue(0);
-    //
-
-    bar.dequeue();
-    cout << bar.peek().startTime << endl;
-    bar.dequeue();
-    cout << bar.isEmpty() << endl;
-
-
-    // ArrayQueue<Event> eventPriorityQueue;
+    PriorityQueue<Event> eventPriorityQueue;
 
     /* Read file into eventPriorityQueue array */
     Event events[99999];
@@ -89,12 +54,14 @@ int main() {
         int counter = 0;
         while(hundredThousandFile >> startTime >> duration) {
             Event event;
+            event.type = 'A';
             event.startTime = startTime;
             event.duration = duration;
             events[counter] = event; // add it to array
 
-            // cout << event.startTime << " | " << event.duration << endl; // DEBUG ONLY
-            // eventPriorityQueue.enqueue(event);
+            cout << event.type << " | " << event.startTime << " | " << event.duration << endl; // DEBUG ONLY
+
+            eventPriorityQueue.enqueue(event);
 
             counter++;
         }
@@ -102,6 +69,30 @@ int main() {
     } else {
         cout << "Cannot open hundred thousand integer file";
     }
+
+    cout << eventPriorityQueue.peek().startTime << endl;
+    eventPriorityQueue.dequeue();
+    cout << eventPriorityQueue.peek().startTime << endl;
+    eventPriorityQueue.dequeue();
+    cout << eventPriorityQueue.peek().startTime << endl;
+    eventPriorityQueue.dequeue();
+    cout << eventPriorityQueue.peek().startTime << endl;
+
+    // Event event_0;
+    // event_0.startTime = 26;
+    //
+    // Event event_1;
+    // event_1.startTime = 50;
+    //
+    // Event event_2;
+    // event_2.startTime = 25;
+    //
+    // PriorityQueue<Event> eventPriorityQueueTest;
+    // eventPriorityQueueTest.enqueue(event_0);
+    // eventPriorityQueueTest.enqueue(event_1);
+    // eventPriorityQueueTest.enqueue(event_2);
+    //
+    // cout << eventPriorityQueueTest.peek().startTime << endl;
 
     bool tellerAvailable = true;
 
