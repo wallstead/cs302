@@ -3,16 +3,34 @@
 #include <fstream>
 #include "Merge.h"
 #include "ArrayQueue.h"
-#include "LinkedList.h"
+#include "SortedList.h"
+#include "PriorityQueue.h"
 
 using namespace std;
 
 void populateFile(int count, std::string const& file);
 
 struct Event {
+    char type;
     int startTime;
     int duration;
     int endTime;
+
+    bool operator > (const Event &rhs ) const {
+        if (startTime > rhs.startTime) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    bool operator != (const Event &rhs ) const {
+        if (startTime != rhs.startTime) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 };
 
 int main() {
@@ -26,20 +44,39 @@ int main() {
 
     ArrayQueue<Event> bankLine;
 
-    LinkedList<int> foo;
-    cout << foo.getLength() << endl;
-    cout << foo.isEmpty() << endl;
-    cout << foo.insert(1,1) << endl;
-    cout << foo.getLength() << endl;
-    cout << foo.isEmpty() << endl;
-    cout << foo.remove(1) << endl;
-    cout << foo.isEmpty() << endl;
-    cout << foo.insert(1,1) << endl;
-    cout << foo.insert(2,2) << endl;
-    cout << foo.insert(3,3) << endl;
-    cout << foo.getEntry(2) << endl;
-    // cout << foo.getEntry(4) << endl; would throw
-    cout << foo.getEntry(3) << endl;
+    SortedList<int> foo;
+    int bar1 = 1;
+    foo.insertSorted(bar1);
+    int bar2 = 3;
+    foo.insertSorted(bar2);
+    int bar3 = 2;
+    foo.insertSorted(bar3);
+    // cout << foo.getPosition(bar2) << endl;
+
+    Event event_1;
+    event_1.startTime = 0;
+    Event event_2;
+    event_2.startTime = 2;
+    Event event_3;
+    event_3.startTime = 1;
+
+
+
+    PriorityQueue<Event> bar;
+    bar.enqueue(event_1);
+    bar.enqueue(event_2);
+    bar.enqueue(event_3);
+    cout << bar.peek().startTime << endl;
+    // bar.enqueue(1);
+    // bar.enqueue(2);
+    // bar.enqueue(0);
+    //
+
+    bar.dequeue();
+    cout << bar.peek().startTime << endl;
+    bar.dequeue();
+    cout << bar.isEmpty() << endl;
+
 
     // ArrayQueue<Event> eventPriorityQueue;
 

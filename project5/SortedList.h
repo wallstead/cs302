@@ -27,11 +27,7 @@ public:
    // The inherited methods remove, clear, getEntry, isEmpty, and
    // getLength have the same specifications as given in ListInterface.
 
-   // The following methods must be overridden to disable their
-   // effect on a sorted list:
-   bool insert(int newPosition, const ItemType& newEntry) override;
-   void replace(int position, const ItemType& newEntry)
-        throw(PrecondViolatedExcept) override;
+
 }; // end SortedList
 #include "SortedList.cpp"
 #endif
