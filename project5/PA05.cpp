@@ -3,6 +3,7 @@
 #include <fstream>
 #include "Merge.h"
 #include "ArrayQueue.h"
+#include "LinkedList.h"
 
 using namespace std;
 
@@ -23,10 +24,26 @@ int main() {
     std::string hundredThousand("events_100,000");
     populateFile(99999, hundredThousand);
 
+    ArrayQueue<Event> bankLine;
 
-    ArrayQueue<Event> line;
+    LinkedList<int> foo;
+    cout << foo.getLength() << endl;
+    cout << foo.isEmpty() << endl;
+    cout << foo.insert(1,1) << endl;
+    cout << foo.getLength() << endl;
+    cout << foo.isEmpty() << endl;
+    cout << foo.remove(1) << endl;
+    cout << foo.isEmpty() << endl;
+    cout << foo.insert(1,1) << endl;
+    cout << foo.insert(2,2) << endl;
+    cout << foo.insert(3,3) << endl;
+    cout << foo.getEntry(2) << endl;
+    // cout << foo.getEntry(4) << endl; would throw
+    cout << foo.getEntry(3) << endl;
 
-    /* Read file into an events array */
+    // ArrayQueue<Event> eventPriorityQueue;
+
+    /* Read file into eventPriorityQueue array */
     Event events[99999];
     ifstream hundredThousandFile("events_100,000");
     if (hundredThousandFile.is_open()) {
@@ -39,10 +56,8 @@ int main() {
             event.duration = duration;
             events[counter] = event; // add it to array
 
-            cout << event.startTime << " | " << event.duration << endl; // DEBUG ONLY
-            line.enqueue(event);
-            //
-            cout << line.peekFront().duration << endl;
+            // cout << event.startTime << " | " << event.duration << endl; // DEBUG ONLY
+            // eventPriorityQueue.enqueue(event);
 
             counter++;
         }
@@ -50,6 +65,10 @@ int main() {
     } else {
         cout << "Cannot open hundred thousand integer file";
     }
+
+    bool tellerAvailable = true;
+
+
 
 
     return 0;
