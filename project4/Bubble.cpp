@@ -1,3 +1,16 @@
+/**
+ * @file Bubble.cpp
+ *
+ * @brief Implementation file for the Bubble sorting class
+ *
+ * @author Willis Allstead
+ *
+ * @details Specifies the functions of the Bubble sorting class
+ *
+ * @version 1.0
+ *
+ */
+
 #include "Bubble.h"
 
 Bubble::Bubble(int toSort[], int count) {
@@ -12,7 +25,7 @@ Bubble::Bubble(int toSort[], int count) {
     swapCount = 0;
 }
 
-void Bubble::sort() {
+void Bubble::sort() { // using a lot of code from the book.
     /* Reset comparison and swap count in case */
     comparisonCount = 0;
     swapCount = 0;
@@ -42,7 +55,7 @@ void Bubble::sort() {
                 sorted = false; // Set flag
             } // end if
 
-            comparisonCount++; // increment comparison count
+            comparisonCount++; // increment comparison count for the if-statement
         } // end for
 
         pass++;

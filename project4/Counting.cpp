@@ -1,3 +1,16 @@
+/**
+ * @file Counting.cpp
+ *
+ * @brief Implementation file for the Counting sorting class
+ *
+ * @author Willis Allstead
+ *
+ * @details Specifies the functions of the Counting sorting class
+ *
+ * @version 1.0
+ *
+ */
+
 #include "Counting.h"
 
 Counting::Counting(int toSort[], int count) {
@@ -36,6 +49,8 @@ void Counting::sort() {
         while (countingArray[k] > 0) { // while there is more than 0 elements at the index
             countingArray[k]--; // decrement the count stored there
             data[countingArrayIndex] = k;
+            swapCount++; // "If you are just overwriting data without need to store it some where else then it isn't a swap, [otherwise swapCount++]".
+
             countingArrayIndex++; //increment index
         }
     }
