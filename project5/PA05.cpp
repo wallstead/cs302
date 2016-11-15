@@ -7,13 +7,10 @@
 
 using namespace std;
 
-void populateFile(int count, std::string const& file);
-
 struct Event {
-    char type;
+    char type; // A: Arrival, D: Departure
     int startTime;
     int duration;
-    int endTime;
 
     bool operator > (const Event &rhs ) const {
         if (startTime < rhs.startTime) {
@@ -32,6 +29,9 @@ struct Event {
     }
 };
 
+void populateFile(int, string const&);
+void processArrival(Event, PriorityQueue<Event> &, ArrayQueue<Event> &, bool &, int);
+
 int main() {
 
     /* Prep rand-num generator */
@@ -45,7 +45,7 @@ int main() {
     ArrayQueue<Event> bankLine;
     PriorityQueue<Event> eventPriorityQueue;
 
-    /* Read file into eventPriorityQueue array */
+    /* Read file into eventPriorityQueue */
     Event events[99999];
     ifstream hundredThousandFile("events_100,000");
     if (hundredThousandFile.is_open()) {
@@ -53,15 +53,15 @@ int main() {
         int duration;
         int counter = 0;
         while(hundredThousandFile >> startTime >> duration) {
-            Event event;
-            event.type = 'A';
-            event.startTime = startTime;
-            event.duration = duration;
-            events[counter] = event; // add it to array
+            Event newEvent;
+            newEvent.type = 'A';
+            newEvent.startTime = startTime;
+            newEvent.duration = duration;
+            // events[counter] = newEvent; // add it to array
 
-            cout << event.type << " | " << event.startTime << " | " << event.duration << endl; // DEBUG ONLY
+            cout << newEvent.type << " | " << newEvent.startTime << " | " << newEvent.duration << endl; // DEBUG ONLY
 
-            eventPriorityQueue.enqueue(event);
+            eventPriorityQueue.enqueue(newEvent);
 
             counter++;
         }
@@ -69,32 +69,60 @@ int main() {
     } else {
         cout << "Cannot open hundred thousand integer file";
     }
-
-    cout << eventPriorityQueue.peek().startTime << endl;
-    eventPriorityQueue.dequeue();
-    cout << eventPriorityQueue.peek().startTime << endl;
-    eventPriorityQueue.dequeue();
-    cout << eventPriorityQueue.peek().startTime << endl;
-    eventPriorityQueue.dequeue();
-    cout << eventPriorityQueue.peek().startTime << endl;
-
-    // Event event_0;
-    // event_0.startTime = 26;
-    //
-    // Event event_1;
-    // event_1.startTime = 50;
-    //
-    // Event event_2;
-    // event_2.startTime = 25;
-    //
-    // PriorityQueue<Event> eventPriorityQueueTest;
-    // eventPriorityQueueTest.enqueue(event_0);
-    // eventPriorityQueueTest.enqueue(event_1);
-    // eventPriorityQueueTest.enqueue(event_2);
-    //
-    // cout << eventPriorityQueueTest.peek().startTime << endl;
-
     bool tellerAvailable = true;
+
+
+
+
+
+
+
+    Event event_0;
+    event_0.type = 'A';
+    event_0.startTime = -1;
+    event_0.duration = 1;
+
+
+
+
+
+
+
+
+
+
+    cout << eventPriorityQueue.peek().startTime << endl;
+    eventPriorityQueue.dequeue();
+    cout << eventPriorityQueue.peek().startTime << endl;
+    eventPriorityQueue.enqueue(event_0);
+    cout << eventPriorityQueue.peek().startTime << endl;
+
+    // while (!eventPriorityQueue.isEmpty()) { // until event queue is empty
+    //     Event newEvent = eventPriorityQueue.peek();
+    //     int currentTime = newEvent.startTime;
+    //
+    //     if (newEvent.type == 'A') { // Arrival
+    //         // processArrival(newEvent, eventPriorityQueue, bankLine, tellerAvailable, currentTime);
+    //
+    //         eventPriorityQueue.dequeue(); // remove the event from the event queue
+    //         if (bankLine.isEmpty() && tellerAvailable) {
+    //             cout << "empty and available" << endl;
+    //             int endTime = currentTime + newEvent.duration;
+    //
+    //             cout << endTime << endl;
+    //             Event newDepartureEvent;
+    //             newDepartureEvent.type = 'A';
+    //             newDepartureEvent.startTime = endTime;
+    //             eventPriorityQueue.enqueue(newDepartureEvent);
+    //             tellerAvailable = false;
+    //         } else {
+    //             bankLine.enqueue(newEvent); // add event of the customer to the line
+    //         }
+    //     } else { // Departure
+    //         cout << "NOT implementated" << endl;
+    //     }
+    // }
+
 
 
 
@@ -124,4 +152,27 @@ void populateFile(int count, std::string const& file) {
         int random_duration = (rand()%100)+1; // from 1 to 100
         myfile << merge.data[index] << " " << random_duration << "\n";
     }
+}
+
+void processArrival(Event event, PriorityQueue<Event> &eventQueue
+                               , ArrayQueue<Event> &bankLine
+                               , bool &tellerAvailable
+                               , int currentTime) {
+    eventQueue.dequeue(); // remove the event from the event queue
+    if (bankLine.isEmpty() && tellerAvailable) {
+        cout << "empty and available" << endl;
+        int endTime = currentTime + event.duration;
+
+
+        Event newDepartureEvent;
+        newDepartureEvent.type = 'D';
+        newDepartureEvent.startTime = endTime;
+        eventQueue.enqueue(newDepartureEvent);
+        tellerAvailable = false;
+    } else {
+        bankLine.enqueue(event); // add event of the customer to the line
+    }
+
+    cout << "got ehre " << endl;
+
 }

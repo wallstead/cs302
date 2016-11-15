@@ -20,6 +20,7 @@ SortedList<ItemType>::~SortedList()
 template<class ItemType>
 bool SortedList<ItemType>::insertSorted(const ItemType& newEntry)
 {
+
    int newPosition = std::abs(getPosition(newEntry));
    // We need to call the LinkedList version of insert, since the
    // SortedList version does nothing but return false
@@ -50,11 +51,13 @@ int SortedList<ItemType>::getPosition(const ItemType& anEntry) const
       position++;
    }  // end while
 
-   if ( (position > length) ||
-        (anEntry != LinkedList<ItemType>::getEntry(position)) )
-   {
+
+
+   if ((position > length) || (anEntry != LinkedList<ItemType>::getEntry(position))) {
       position = -position;
    }  // end if
+
+   // std::cout << "position: " << position  << ", length: " << length << endl;
 
    return position;
 }  // end getPosition

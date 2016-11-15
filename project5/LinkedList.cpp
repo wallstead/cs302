@@ -38,13 +38,10 @@ throw(PrecondViolatedExcept)
 {
     // Enforce precondition
     bool ableToGet = (position >= 1) && (position <= itemCount);
-    if (ableToGet)
-    {
+    if (ableToGet) {
         Node<ItemType>* nodePtr = getNodeAt(position);
         return nodePtr -> getItem();
-    }
-    else
-    {
+    } else {
         std::string message = "getEntry() called with an empty list or ";
         message = message + "invalid position.";
         throw(PrecondViolatedExcept(message));
@@ -84,15 +81,41 @@ Node<ItemType>* LinkedList<ItemType>::getNodeAt(int position) const
     return curPtr;
 }  // end getNodeAt
 
+// template<class ItemType>
+// bool LinkedList<ItemType>::insert(int newPosition, const ItemType& newEntry)
+// {
+//     bool ableToInsert = (newPosition >= 1) && (newPosition <= itemCount + 1);
+//
+//     // cout << "able to insert?: " << ableToInsert << " at position: " << newPosition << endl;
+//     if (ableToInsert) {
+//         // Create a new node containing the new entry
+//         Node<ItemType>* newNodePtr = new Node<ItemType>(newEntry);
+//         headPtr = insertNode(newPosition, newNodePtr, headPtr);
+//     } // end if
+//     return ableToInsert;
+// } // end insert
+
 template<class ItemType>
 bool LinkedList<ItemType>::insert(int newPosition, const ItemType& newEntry)
 {
     bool ableToInsert = (newPosition >= 1) && (newPosition <= itemCount + 1);
-    if (ableToInsert)
-    {
+    if (ableToInsert) {
         // Create a new node containing the new entry
         Node<ItemType>* newNodePtr = new Node<ItemType>(newEntry);
-        headPtr = insertNode(newPosition, newNodePtr, headPtr);
+
+        // Attach new node to chain
+        if (newPosition == 1) {
+            // Insert new node at beginning of chain
+            newNodePtr->setNext(headPtr);
+            headPtr = newNodePtr;
+        } else {
+            // Find node that will be before new node
+            Node<ItemType>* prevPtr = getNodeAt(newPosition - 1);
+            // Insert new node after node to which prevPtr points
+            newNodePtr->setNext(prevPtr->getNext());
+            prevPtr->setNext(newNodePtr);
+        } // end if
+        itemCount++; // Increase count of entries
     } // end if
     return ableToInsert;
 } // end insert
@@ -154,20 +177,19 @@ int LinkedList<ItemType>::getLength() const
 
 template<class ItemType>
 Node<ItemType>* LinkedList<ItemType>::insertNode(int position, Node<ItemType>* newNodePtr,
-                                                 Node<ItemType>* subChainPtr)
-{
-   if (position == 1)
-   {
-      // Insert new node at beginning of subchain
-      newNodePtr->setNext(subChainPtr);
-      subChainPtr = newNodePtr;
-      itemCount++;  // Increase count of entries
-   }
-   else
-   {
-      Node<ItemType>* afterPtr = insertNode(position - 1, newNodePtr, subChainPtr->getNext());
-      subChainPtr->setNext(afterPtr);
-   }  // end if
+                                                 Node<ItemType>* subChainPtr) {
 
-   return subChainPtr;
+    if (position == 1) {
+        // Insert new node at beginning of subchain
+        newNodePtr->setNext(subChainPtr);
+        subChainPtr = newNodePtr;
+        itemCount++;  // Increase count of entries
+    } else {
+        cout << newNodePtr->getItem().startTime << endl;
+        Node<ItemType> *afterPtr = insertNode(position - 1, newNodePtr, subChainPtr->getNext());
+
+        subChainPtr->setNext(afterPtr);
+    }  // end if
+
+    return subChainPtr;
 }  // end insertNode
