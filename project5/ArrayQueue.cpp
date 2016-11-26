@@ -57,7 +57,7 @@ ItemType ArrayQueue<ItemType>::peekFront() const
 {
    // Enforce precondition
    if (isEmpty())
-      throw string("peekFront() called with empty queue");
+      throw string("peekFront() called with empty array queue");
 
    // Queue is not empty; return front
    return items[front];

@@ -18,10 +18,12 @@ private:
     SortedList<ItemType> sList; // sorted list of items
 
 public:
+
     PriorityQueue();
     PriorityQueue(const PriorityQueue& pq);
     ~PriorityQueue();
 
+    // Checks if empty.
     bool isEmpty() const;
     bool enqueue(const ItemType& newEntry);
     bool dequeue();

@@ -1,3 +1,16 @@
+/**
+ * @file PriorityQueue.cpp
+ *
+ * @brief Implementation file for the PriorityQueue class
+ *
+ * @author Someone at Pearson (I didn't code any of this)
+ *
+ * @details Specifies function of the class.
+ *
+ * @version 0.10
+ *
+ */
+
 template<class ItemType>
 PriorityQueue<ItemType>::PriorityQueue()
 {
