@@ -1,9 +1,8 @@
 
 template<class ItemType>
 BinaryNode<ItemType>::BinaryNode() {
-  // item = NULL;
-  leftChildPtr = NULL;
-  rightChildPtr = NULL;
+  leftChildPtr = nullptr;
+  rightChildPtr = nullptr;
 }
 
 template<class ItemType>

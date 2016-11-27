@@ -10,18 +10,23 @@
  */
 
 #include <iostream>
-#include "BinaryNode.h"
+#include "BinaryNodeTree.h"
 
 using namespace std;
 
+void visit(int &visited) {
+  cout << visited << endl;
+}
+
 int main() {
-  BinaryNode<float> *bnode = new BinaryNode<float>[1];
-  bnode->setItem(99);
-  cout << bnode->getItem() << endl;
-  cout << bnode->isLeaf() << endl;
+  BinaryNodeTree<int> bNodeTree;
 
+  bNodeTree.add(9);
+  bNodeTree.add(1);
+  bNodeTree.add(18);
+  bNodeTree.add(22);
 
-
+  bNodeTree.postorderTraverse(visit);
 
   return 0;
 }
