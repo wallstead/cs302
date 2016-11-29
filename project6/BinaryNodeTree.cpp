@@ -1,3 +1,14 @@
+/**
+ * @file BinaryNodeTree.cpp
+ *
+ * @brief Implementation file for the Binary Node Tree class
+ *
+ * @author Willis Allstead
+ *
+ * @version 0.5
+ *
+ */
+
 template<class ItemType>
 BinaryNodeTree<ItemType>::BinaryNodeTree() {
   rootPtr = nullptr;
@@ -13,11 +24,7 @@ int BinaryNodeTree<ItemType>::getHeightHelper(BinaryNode<ItemType> *subTreePtr) 
   if (subTreePtr == nullptr) {
     return 0;
   } else {
-
-    int heightOfLeft = getHeightHelper(subTreePtr->getLeftChildPtr());
-    int heightOfRight = getHeightHelper(subTreePtr->getRightChildPtr());
-
-    return 1 + std::max(heightOfLeft, heightOfRight); // max returns largest of two
+    return 1 + std::max(getHeightHelper(subTreePtr->getLeftChildPtr()), getHeightHelper(subTreePtr->getRightChildPtr())); // max returns largest of two
   }
 }
 
@@ -27,13 +34,7 @@ int BinaryNodeTree<ItemType>::getNumberOfNodesHelper(BinaryNode<ItemType> *subTr
   if (subTreePtr == nullptr) {
     return 0;
   } else {
-    int count = 0;
-    if (subTreePtr->getRightChildPtr()) {
-      count += getNumberOfNodesHelper(subTreePtr->getRightChildPtr()) + 1;
-    } else if (subTreePtr->getLeftChildPtr()) {
-      count += getNumberOfNodesHelper(subTreePtr->getLeftChildPtr()) + 1;
-    }
-    return count;
+    return 1 + getNumberOfNodesHelper(subTreePtr -> getLeftChildPtr()) + getNumberOfNodesHelper(subTreePtr -> getRightChildPtr());
   }
 }
 

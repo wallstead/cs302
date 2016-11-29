@@ -1,3 +1,14 @@
+/**
+ * @file BinarySearchTree.cpp
+ *
+ * @brief Implementation file for the Binary Search Tree class
+ *
+ * @author Willis Allstead
+ *
+ * @version 0.5
+ *
+ */
+
 template<class ItemType>
 BinarySearchTree<ItemType>::BinarySearchTree() {
   rootPtr = nullptr;
@@ -56,18 +67,21 @@ BinaryNode<ItemType>* BinarySearchTree<ItemType>::removeNode(
                                         BinaryNode<ItemType> *nodeToRemovePtr) {
   if (nodeToRemovePtr->isLeaf()) {
     // remove leaf from tree
-    delete [] nodeToRemovePtr; // TODO: check if this works
+    delete nodeToRemovePtr;
+    nodeToRemovePtr = nullptr;
     return nodeToRemovePtr;
-  } else if (nodeToRemovePtr->getLeftChildPtr() != nodeToRemovePtr->getRightChildPtr()) { // != is logical XOR
+  } else if ((nodeToRemovePtr->getLeftChildPtr() == nullptr && nodeToRemovePtr->getRightChildPtr() != nullptr) || (nodeToRemovePtr->getRightChildPtr() == nullptr && nodeToRemovePtr->getLeftChildPtr() != nullptr)) { // != is logical XOR
     // if it has only one child
+    // std::cout << "hereeeeee"  << std::endl;
     BinaryNode<ItemType> *nodeToConnectPtr;
-    if (nodeToRemovePtr->getLeftChildPtr()) { // if it has a left child
+    if (nodeToRemovePtr->getLeftChildPtr() != nullptr) { // if it has a left child
       nodeToConnectPtr = nodeToRemovePtr->getLeftChildPtr();
     } else { // if it has a right child
       nodeToConnectPtr = nodeToRemovePtr->getRightChildPtr();
     }
 
-    delete [] nodeToRemovePtr;
+    delete nodeToRemovePtr;
+    nodeToRemovePtr = nullptr;
     return nodeToConnectPtr;
   } else {
     // has two children
@@ -97,8 +111,17 @@ BinaryNode<ItemType>* BinarySearchTree<ItemType>::removeLeftmostNode(
 }
 
 template<class ItemType>
+void BinarySearchTree<ItemType>::clearTree(BinaryNode<ItemType> *subTreePtr) {
+  if (subTreePtr) {
+    clearTree(subTreePtr->getLeftChildPtr());
+    clearTree(subTreePtr->getRightChildPtr());
+    delete subTreePtr;
+  }
+}
+
+template<class ItemType>
 bool BinarySearchTree<ItemType>::isEmpty() const {
-  return BinaryNodeTree<ItemType>::isEmpty();
+  return (rootPtr == nullptr);
 }
 
 template<class ItemType>
@@ -136,4 +159,25 @@ bool BinarySearchTree<ItemType>::remove(const ItemType &target) {
   bool isSuccessful = false;
   rootPtr = removeValue(rootPtr, target, isSuccessful);
   return isSuccessful;
+}
+
+template<class ItemType>
+void BinarySearchTree<ItemType>::clear() {
+  clearTree(rootPtr);
+  rootPtr = nullptr;
+}
+
+template<class ItemType>
+void BinarySearchTree<ItemType>::preorderTrav(void visit(ItemType&)) const {
+  BinaryNodeTree<ItemType>::preorder(visit, rootPtr);
+}
+
+template<class ItemType>
+void BinarySearchTree<ItemType>::inorderTrav(void visit(ItemType&)) const {
+  BinaryNodeTree<ItemType>::inorder(visit, rootPtr);
+}
+
+template<class ItemType>
+void BinarySearchTree<ItemType>::postorderTrav(void visit(ItemType&)) const {
+  BinaryNodeTree<ItemType>::postorder(visit, rootPtr);
 }

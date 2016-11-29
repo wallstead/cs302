@@ -1,14 +1,19 @@
+/**
+ * @file BinaryNode.cpp
+ *
+ * @brief Implementation file for the Binary Node class
+ *
+ * @author Willis Allstead
+ *
+ * @version 0.5
+ *
+ */
 
 template<class ItemType>
 BinaryNode<ItemType>::BinaryNode() {
-  leftChildPtr = nullptr;
+  leftChildPtr = nullptr; // initialize both to null initially
   rightChildPtr = nullptr;
 }
-
-// template<class ItemType>
-// BinaryNode<ItemType>::~BinaryNode() {
-//   std::cout << "test deleting" << std::endl;
-// }
 
 template<class ItemType>
 void BinaryNode<ItemType>::setItem(const ItemType &anItem) {
@@ -23,7 +28,7 @@ ItemType BinaryNode<ItemType>::getItem() const {
 template<class ItemType>
 bool BinaryNode<ItemType>::isLeaf() const {
   // if no children, return true
-  return ((leftChildPtr == NULL) && (rightChildPtr == NULL));
+  return ((leftChildPtr == nullptr) && (rightChildPtr == nullptr)); 
 }
 
 template<class ItemType>
