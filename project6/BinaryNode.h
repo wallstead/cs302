@@ -10,6 +10,7 @@ private:
 
 public:
   BinaryNode();
+  // ~BinaryNode();
 
   void setItem(const ItemType &anItem);
   ItemType getItem() const;

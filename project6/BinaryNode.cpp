@@ -5,6 +5,11 @@ BinaryNode<ItemType>::BinaryNode() {
   rightChildPtr = nullptr;
 }
 
+// template<class ItemType>
+// BinaryNode<ItemType>::~BinaryNode() {
+//   std::cout << "test deleting" << std::endl;
+// }
+
 template<class ItemType>
 void BinaryNode<ItemType>::setItem(const ItemType &anItem) {
   item = anItem;

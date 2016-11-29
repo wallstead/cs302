@@ -10,7 +10,7 @@
  */
 
 #include <iostream>
-#include "BinaryNodeTree.h"
+#include "BinarySearchTree.h"
 
 using namespace std;
 
@@ -19,14 +19,14 @@ void visit(int &visited) {
 }
 
 int main() {
-  BinaryNodeTree<int> bNodeTree;
+  BinarySearchTree<int> bSearchTree;
 
-  bNodeTree.add(9);
-  bNodeTree.add(1);
-  bNodeTree.add(18);
-  bNodeTree.add(22);
+  for (int i = 0; i < 100; i+=2) {
+    bSearchTree.add(i);
+    cout << "height after adding: " << i << ": "<< bSearchTree.getHeight() << endl;
+  }
 
-  bNodeTree.postorderTraverse(visit);
+  // cout << "height after adding 100 more nodes: " << bSearchTree.getHeight() << endl;
 
   return 0;
 }

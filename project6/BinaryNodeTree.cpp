@@ -23,6 +23,7 @@ int BinaryNodeTree<ItemType>::getHeightHelper(BinaryNode<ItemType> *subTreePtr) 
 
 template<class ItemType>
 int BinaryNodeTree<ItemType>::getNumberOfNodesHelper(BinaryNode<ItemType> *subTreePtr) const {
+  /* TODO: make this work correctly */
   if (subTreePtr == nullptr) {
     return 0;
   } else {
