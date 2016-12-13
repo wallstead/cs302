@@ -1,5 +1,5 @@
 /**
- * @file BinarySearchTreeRedBlack.h
+ * @file BinarySearchTree.h
  *
  * @brief Header file for the Binary Search Tree class
  *
@@ -11,14 +11,14 @@
  *
  */
 
-#ifndef BINARY_SEARCH_TREE_RED_BLACK_
-#define BINARY_SEARCH_TREE_RED_BLACK_
+#ifndef BINARY_SEARCH_TREE_
+#define BINARY_SEARCH_TREE_
 
 #include "BinaryNode.h"
 #include "BinaryNodeTree.h"
 
 template<class ItemType>
-class BinarySearchTreeRedBlack : public BinaryNodeTree<ItemType> {
+class BinarySearchTree : public BinaryNodeTree<ItemType> {
 private:
   BinaryNode<ItemType> *rootPtr;
 
@@ -49,8 +49,8 @@ public:
   //------------------------------------------------------------
   // Constructor and Destructor Section.
   //------------------------------------------------------------
-  BinarySearchTreeRedBlack();
-  ~BinarySearchTreeRedBlack();
+  BinarySearchTree();
+  ~BinarySearchTree();
 
   //------------------------------------------------------------
   // Public Methods Section.
@@ -71,7 +71,7 @@ public:
   void preorderTrav(void visit(ItemType&)) const;
   void inorderTrav(void visit(ItemType&)) const;
   void postorderTrav(void visit(ItemType&)) const;
-}; // end BinarySearchTreeRedBlack
+}; // end BinarySearchTree
 
-#include "BinarySearchTreeRedBlack.cpp"
+#include "BinarySearchTree.cpp"
 #endif

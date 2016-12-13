@@ -1,5 +1,5 @@
 /**
- * @file BinarySearchTreeRedBlack.cpp
+ * @file BinarySearchTree.cpp
  *
  * @brief Implementation file for the Binary Search Tree class
  *
@@ -10,36 +10,42 @@
  */
 
 template<class ItemType>
-BinarySearchTreeRedBlack<ItemType>::BinarySearchTreeRedBlack() {
+BinarySearchTree<ItemType>::BinarySearchTree() {
   rootPtr = nullptr;
 }
 
 template<class ItemType>
-BinarySearchTreeRedBlack<ItemType>::~BinarySearchTreeRedBlack() {
+BinarySearchTree<ItemType>::~BinarySearchTree() {
 
 }
 
 template<class ItemType>
-BinaryNode<ItemType>* BinarySearchTreeRedBlack<ItemType>::placeNode(
+BinaryNode<ItemType>* BinarySearchTree<ItemType>::placeNode(
                                 BinaryNode<ItemType> *subTreePtr,
                                 BinaryNode<ItemType> *newNodePtr) {
+
   if (subTreePtr == nullptr) {
+    newNodePtr->setParentPtr(nullptr); // unnecessary
     return newNodePtr;
   } else if (subTreePtr->getItem() > newNodePtr->getItem()) {
     BinaryNode<ItemType> *tempPtr = placeNode(subTreePtr->getLeftChildPtr(),
                                               newNodePtr);
     subTreePtr->setLeftChildPtr(tempPtr);
+    tempPtr->setParentPtr(subTreePtr);
   } else {
     BinaryNode<ItemType> *tempPtr = placeNode(subTreePtr->getRightChildPtr(),
                                               newNodePtr);
     subTreePtr->setRightChildPtr(tempPtr);
+    tempPtr->setParentPtr(subTreePtr);
   }
+
+
 
   return subTreePtr;
 }
 
 template<class ItemType>
-BinaryNode<ItemType>* BinarySearchTreeRedBlack<ItemType>::removeValue(
+BinaryNode<ItemType>* BinarySearchTree<ItemType>::removeValue(
                                 BinaryNode<ItemType> *subTreePtr,
                                 const ItemType &target, bool &isSuccessful) {
   if (subTreePtr == nullptr) {
@@ -63,7 +69,7 @@ BinaryNode<ItemType>* BinarySearchTreeRedBlack<ItemType>::removeValue(
 }
 
 template<class ItemType>
-BinaryNode<ItemType>* BinarySearchTreeRedBlack<ItemType>::removeNode(
+BinaryNode<ItemType>* BinarySearchTree<ItemType>::removeNode(
                                         BinaryNode<ItemType> *nodeToRemovePtr) {
   if (nodeToRemovePtr->isLeaf()) {
     // remove leaf from tree
@@ -96,7 +102,7 @@ BinaryNode<ItemType>* BinarySearchTreeRedBlack<ItemType>::removeNode(
 }
 
 template<class ItemType>
-BinaryNode<ItemType>* BinarySearchTreeRedBlack<ItemType>::removeLeftmostNode(
+BinaryNode<ItemType>* BinarySearchTree<ItemType>::removeLeftmostNode(
                                           BinaryNode<ItemType> *nodePtr,
                                           ItemType &inorderSuccessor) {
   if (nodePtr->getLeftChildPtr() == nullptr) {
@@ -111,7 +117,7 @@ BinaryNode<ItemType>* BinarySearchTreeRedBlack<ItemType>::removeLeftmostNode(
 }
 
 template<class ItemType>
-void BinarySearchTreeRedBlack<ItemType>::clearTree(BinaryNode<ItemType> *subTreePtr) {
+void BinarySearchTree<ItemType>::clearTree(BinaryNode<ItemType> *subTreePtr) {
   if (subTreePtr) {
     clearTree(subTreePtr->getLeftChildPtr());
     clearTree(subTreePtr->getRightChildPtr());
@@ -120,32 +126,32 @@ void BinarySearchTreeRedBlack<ItemType>::clearTree(BinaryNode<ItemType> *subTree
 }
 
 template<class ItemType>
-bool BinarySearchTreeRedBlack<ItemType>::isEmpty() const {
+bool BinarySearchTree<ItemType>::isEmpty() const {
   return (rootPtr == nullptr);
 }
 
 template<class ItemType>
-int BinarySearchTreeRedBlack<ItemType>::getHeight() const {
+int BinarySearchTree<ItemType>::getHeight() const {
   return BinaryNodeTree<ItemType>::getHeightHelper(rootPtr);
 }
 
 template<class ItemType>
-int BinarySearchTreeRedBlack<ItemType>::getNumberOfNodes() const {
+int BinarySearchTree<ItemType>::getNumberOfNodes() const {
   return BinaryNodeTree<ItemType>::getNumberOfNodesHelper(rootPtr);
 }
 
 template<class ItemType>
-ItemType BinarySearchTreeRedBlack<ItemType>::getRootData() const {
+ItemType BinarySearchTree<ItemType>::getRootData() const {
   return rootPtr->getItem();
 }
 
 template<class ItemType>
-void BinarySearchTreeRedBlack<ItemType>::setRootData(ItemType &newEntry) {
+void BinarySearchTree<ItemType>::setRootData(ItemType &newEntry) {
   return rootPtr->setItem(newEntry);
 }
 
 template<class ItemType>
-bool BinarySearchTreeRedBlack<ItemType>::add(const ItemType &newData) {
+bool BinarySearchTree<ItemType>::add(const ItemType &newData) {
   BinaryNode<ItemType> *newNodePtr = new BinaryNode<ItemType>;
   newNodePtr->setItem(newData);
 
@@ -155,31 +161,29 @@ bool BinarySearchTreeRedBlack<ItemType>::add(const ItemType &newData) {
 }
 
 template<class ItemType>
-bool BinarySearchTreeRedBlack<ItemType>::remove(const ItemType &target) {
+bool BinarySearchTree<ItemType>::remove(const ItemType &target) {
   bool isSuccessful = false;
   rootPtr = removeValue(rootPtr, target, isSuccessful);
   return isSuccessful;
 }
 
 template<class ItemType>
-void BinarySearchTreeRedBlack<ItemType>::clear() {
+void BinarySearchTree<ItemType>::clear() {
   clearTree(rootPtr);
   rootPtr = nullptr;
 }
 
-// Traversals will stay the same for red-black trees
-
 template<class ItemType>
-void BinarySearchTreeRedBlack<ItemType>::preorderTrav(void visit(ItemType&)) const {
+void BinarySearchTree<ItemType>::preorderTrav(void visit(ItemType&)) const {
   BinaryNodeTree<ItemType>::preorder(visit, rootPtr);
 }
 
 template<class ItemType>
-void BinarySearchTreeRedBlack<ItemType>::inorderTrav(void visit(ItemType&)) const {
+void BinarySearchTree<ItemType>::inorderTrav(void visit(ItemType&)) const {
   BinaryNodeTree<ItemType>::inorder(visit, rootPtr);
 }
 
 template<class ItemType>
-void BinarySearchTreeRedBlack<ItemType>::postorderTrav(void visit(ItemType&)) const {
+void BinarySearchTree<ItemType>::postorderTrav(void visit(ItemType&)) const {
   BinaryNodeTree<ItemType>::postorder(visit, rootPtr);
 }

@@ -13,9 +13,10 @@
 
 template<class ItemType>
 BinaryNode<ItemType>::BinaryNode() {
-  leftChildPtr = nullptr; // initialize both to null initially
+  parentPtr = nullptr;
+  leftChildPtr = nullptr; // initialize left and right to black
   rightChildPtr = nullptr;
-  color = black; // is black by default (arbitrary)
+  color = red; // is red by default
 }
 
 template<class ItemType>
@@ -35,6 +36,11 @@ bool BinaryNode<ItemType>::isLeaf() const {
 }
 
 template<class ItemType>
+BinaryNode<ItemType>* BinaryNode<ItemType>::getParentPtr() const {
+  return parentPtr;
+}
+
+template<class ItemType>
 BinaryNode<ItemType>* BinaryNode<ItemType>::getLeftChildPtr() const {
   return leftChildPtr;
 }
@@ -42,6 +48,11 @@ BinaryNode<ItemType>* BinaryNode<ItemType>::getLeftChildPtr() const {
 template<class ItemType>
 BinaryNode<ItemType>* BinaryNode<ItemType>::getRightChildPtr() const {
   return rightChildPtr;
+}
+
+template<class ItemType>
+void BinaryNode<ItemType>::setParentPtr(BinaryNode<ItemType> *pPtr) {
+  parentPtr = pPtr;
 }
 
 template<class ItemType>

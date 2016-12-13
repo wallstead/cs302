@@ -23,6 +23,7 @@ template<class ItemType>
 class BinaryNode {
 private:
   ItemType item; // data stored in node
+  BinaryNode<ItemType> *parentPtr;
   BinaryNode<ItemType> *leftChildPtr;
   BinaryNode<ItemType> *rightChildPtr;
 
@@ -41,9 +42,11 @@ public:
 
   color_t color; // red or black
 
+  BinaryNode<ItemType>* getParentPtr() const;
   BinaryNode<ItemType>* getLeftChildPtr() const;
   BinaryNode<ItemType>* getRightChildPtr() const;
 
+  void setParentPtr(BinaryNode<ItemType> *parentPtr);
   void setLeftChildPtr(BinaryNode<ItemType> *leftPtr);
   void setRightChildPtr(BinaryNode<ItemType> *rightPtr);
 };
