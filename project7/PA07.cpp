@@ -16,10 +16,6 @@ using namespace std;
 
 bool existsInArray(int toCheck, int arr[], int count);
 
-void visit(int &visited) {
-  cout << visited << endl;
-}
-
 const int numValues = 1000;
 
 int main() {
@@ -31,20 +27,28 @@ int main() {
       do {
         random_int = (rand()%(max-1))+1; // from 1 to 10,000
       } while (existsInArray(random_int, randArr, index)); // inefficient
-      // cout << random_int << endl;
       randArr[index] = random_int;
   }
-
-  /* Insert them into a binary search tree (BST1) */
+  /* Insert them into a red-black tree (RBT1) */
   RedBlackTree<int> RBT1;
 
   for (int i = 0; i < numValues; i++) {
-    RBT1.add(i);
-    cout << "height after adding: " << i << ": "<< RBT1.getHeight() << endl; //DEBUG ONLY
+    RBT1.add(randArr[i]);
   }
 
-  cout << RBT1.getHeight() << endl;
-//
+  cout << "Height of tree after inserting " << numValues << " unique nodes: " << RBT1.getHeight() << endl;
+
+  int sum = 0;
+
+  RBT1.inorderTrav(sum);
+
+  cout << "(using inorder) Sum of values in tree: " << sum << endl;
+
+  cout << "Is tree empty before clearing? " << boolalpha << RBT1.isEmpty() << endl;
+
+  RBT1.clear();
+
+  cout << "Is tree empty after clearing? " << boolalpha << RBT1.isEmpty() << endl;
 
   return 0;
 }

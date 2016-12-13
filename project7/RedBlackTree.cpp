@@ -1,7 +1,7 @@
 /**
  * @file RedBlackTree.cpp
  *
- * @brief Implementation file for the Binary Search Tree class
+ * @brief Implementation file for the Red Black Tree class
  *
  * @author Willis Allstead
  *
@@ -21,177 +21,93 @@ RedBlackTree<ItemType>::~RedBlackTree() {
 
 template<class ItemType>
 void RedBlackTree<ItemType>::rotateLeft(BinaryNode<ItemType> *x) {
-  // node y;
   BinaryNode<ItemType> *y;
-  // y = x->right;
   y = x->getRightChildPtr();
-  // /* Turn y's left sub-tree into x's right sub-tree */
-  // x->right = y->left;
-  x->setRightChildPtr(y->getLeftChildPtr());
-  // if (y->left != nullptr)
+  x->setRightChildPtr(y->getLeftChildPtr()); // Turn y's left sub-tree into x's right sub-tree
   if (y->getLeftChildPtr() != nullptr) {
-    // y->left->getParentPtr() = x;
     y->getLeftChildPtr()->setParentPtr(x);
   }
-  // /* y's new parent was x's parent */
-  // y->getParentPtr() = x->getParentPtr();
-  y->setParentPtr(x->getParentPtr());
-  // /* Set the parent to point to y instead of x */
-  // /* First see whether we're at the root */
-  // if ( x->getParentPtr() == NULL ) T->root = y;
+
+  y->setParentPtr(x->getParentPtr()); // y's new parent is x's old parent
+
   if (x->getParentPtr() == nullptr) {
     rootPtr = y;
-  } else { // else
-    // if ( x == (x->getParentPtr())->left )
+  } else {
     if (x == (x->getParentPtr()->getLeftChildPtr())) {
-      // /* x was on the left of its parent */
-      // x->getParentPtr()->left = y;
       x->getParentPtr()->setLeftChildPtr(y);
-    } else { // else
-      // /* x must have been on the right */
-      // x->getParentPtr()->right = y;
+    } else {
       x->getParentPtr()->setRightChildPtr(y);
     }
   }
-  // /* Finally, put x on y's left */
-  // y->left = x;
-  y->setLeftChildPtr(x);
-  // x->getParentPtr() = y;
+  y->setLeftChildPtr(x); // put x on y's left
   x->setParentPtr(y);
 }
 
 template<class ItemType>
 void RedBlackTree<ItemType>::rotateRight(BinaryNode<ItemType> *x) {
-  // node y;
   BinaryNode<ItemType> *y;
-  // y = x->right;
   y = x->getLeftChildPtr();
-  // /* Turn y's left sub-tree into x's right sub-tree */
-  // x->right = y->left;
   x->setLeftChildPtr(y->getRightChildPtr());
-  // if (y->left != nullptr)
   if (y->getRightChildPtr() != nullptr) {
-    // y->left->getParentPtr() = x;
     y->getRightChildPtr()->setParentPtr(x);
   }
-  // /* y's new parent was x's parent */
-  // y->getParentPtr() = x->getParentPtr();
   y->setParentPtr(x->getParentPtr());
-  // /* Set the parent to point to y instead of x */
-  // /* First see whether we're at the root */
-  // if ( x->getParentPtr() == NULL ) T->root = y;
   if (x->getParentPtr() == nullptr) {
     rootPtr = y;
-  } else { // else
-    // if ( x == (x->getParentPtr())->left )
+  } else {
     if (x == (x->getParentPtr()->getRightChildPtr())) {
-      // /* x was on the left of its parent */
-      // x->getParentPtr()->left = y;
       x->getParentPtr()->setRightChildPtr(y);
-    } else { // else
-      // /* x must have been on the right */
-      // x->getParentPtr()->right = y;
+    } else {
       x->getParentPtr()->setLeftChildPtr(y);
     }
   }
-  // /* Finally, put x on y's left */
-  // y->left = x;
   y->setRightChildPtr(x);
-  // x->getParentPtr() = y;
   x->setParentPtr(y);
 }
 
 template<class ItemType>
 void RedBlackTree<ItemType>::insertNode(BinaryNode<ItemType> *x) {
-  // /* Insert in the tree in the usual way */
-  // tree_insert( T, x );
+  //  Insert in the tree in the way binary search did
   rootPtr = BinarySearchTree<ItemType>::placeNode(rootPtr, x);
-  // /* Now restore the red-black property */
-  // x->color = red;
-
-  // std::cout << "inserting: " << x->getItem() << std::endl;
-
+  // Now fix it all
   x->color = red;
-  // while ( (x != T->root) && (x->getParentPtr()->color == red) ) {
   while ((x != rootPtr) && (x->getParentPtr()->color == red)) {
     if ( x->getParentPtr() == x->getParentPtr()->getParentPtr()->getLeftChildPtr() ) {
-      // /* If x's parent is a left, y is x's right 'uncle' */
-      // y = x->getParentPtr()->getParentPtr()->right;
       BinaryNode<ItemType> *y = x->getParentPtr()->getParentPtr()->getRightChildPtr();
-      // if ( y->color == red )
       if (y != nullptr && y->color == red) {
-        /* case 1 - change the colors */
-        // x->getParentPtr()->color = black;
         x->getParentPtr()->color = black;
-        // y->color = black;
         y->color = black;
-        // x->getParentPtr()->getParentPtr()->color = red;
         x->getParentPtr()->getParentPtr()->color = red;
-        // /* Move x up the tree */
-        // x = x->getParentPtr()->getParentPtr();
-        x = x->getParentPtr()->getParentPtr();
-      } else { // is black (or null)
-        /* y is a black node */
-        // if ( x == x->getParentPtr()->right )
+        x = x->getParentPtr()->getParentPtr(); // Move x up the tree
+      } else { // is black (or null since I don't have null nodes really)
         if (x == x->getParentPtr()->getRightChildPtr()) {
-          /* and x is to the right */
-          // /* case 2 - move x up and rotate */
-          // x = x->getParentPtr();
           x = x->getParentPtr();
-          // left_rotate( T, x );
           rotateLeft(x);
         }
-        // /* case 3 */
-        // x->getParentPtr()->color = black;
         x->getParentPtr()->color = black;
-        // x->getParentPtr()->getParentPtr()->color = red;
         x->getParentPtr()->getParentPtr()->color = red;
-        // right_rotate( T, x->getParentPtr()->getParentPtr() );
         rotateRight(x->getParentPtr()->getParentPtr());
       }
     } else { // RIGHT AND LEFT EXCHANGED FROM PRIOR IF
-      // /* If x's parent is a right, y is x's left 'uncle' */
-      // y = x->getParentPtr()->getParentPtr()->left;
       BinaryNode<ItemType> *y = x->getParentPtr()->getParentPtr()->getLeftChildPtr();
-      // if ( y->color == red )x
       if (y != nullptr && y->color == red) {
-        /* case 1 - change the colors */
-        // x->getParentPtr()->color = black;
         x->getParentPtr()->color = black;
-        // y->color = black;
         y->color = black;
-        // x->getParentPtr()->getParentPtr()->color = red;
         x->getParentPtr()->getParentPtr()->color = red;
-        // /* Move x up the tree */
-        // x = x->getParentPtr()->getParentPtr();
-        x = x->getParentPtr()->getParentPtr();
+        x = x->getParentPtr()->getParentPtr(); // Move x up the tree
       } else {
-        /* y is a black node */
-        // if ( x == x->getParentPtr()->left )
+        /* y is a black node (or null since I don't have null nodes really) */
         if (x == x->getParentPtr()->getLeftChildPtr()) {
-          /* and x is to the left */
-          // /* case 2 - move x up and rotate */
-          // x = x->getParentPtr();
           x = x->getParentPtr();
-          // right_rotate( T, x );
           rotateRight(x);
         }
-        // /* case 3 */
-        // x->getParentPtr()->color = black;
         x->getParentPtr()->color = black;
-        // x->getParentPtr()->getParentPtr()->color = red;
         x->getParentPtr()->getParentPtr()->color = red;
-        // left_rotate( T, x->getParentPtr()->getParentPtr() );
         rotateLeft(x->getParentPtr()->getParentPtr());
       }
     }
   }
-
-  //
-  // /* color the root black */
-  // T->root->color = black;
-  rootPtr->color = black;
-  std::cout << "--------" << std::endl;
+  rootPtr->color = black; // root is always black
 }
 
 template<class ItemType>
@@ -238,7 +154,7 @@ bool RedBlackTree<ItemType>::remove(const ItemType &target) {
 
 template<class ItemType>
 void RedBlackTree<ItemType>::clear() {
-  clearTree(rootPtr);
+  BinarySearchTree<ItemType>::clearTree(rootPtr);
   rootPtr = nullptr;
 }
 
@@ -250,8 +166,8 @@ void RedBlackTree<ItemType>::preorderTrav(void visit(ItemType&)) const {
 }
 
 template<class ItemType>
-void RedBlackTree<ItemType>::inorderTrav(void visit(ItemType&)) const {
-  BinaryNodeTree<ItemType>::inorder(visit, rootPtr);
+void RedBlackTree<ItemType>::inorderTrav(ItemType &sum) const {
+  BinaryNodeTree<ItemType>::inorder(sum, rootPtr);
 }
 
 template<class ItemType>

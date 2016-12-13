@@ -73,15 +73,14 @@ void BinaryNodeTree<ItemType>::preorder(void visit(ItemType&), BinaryNode<ItemTy
 }
 
 template<class ItemType>
-void BinaryNodeTree<ItemType>::inorder(void visit(ItemType&), BinaryNode<ItemType> *treePtr) const {
+void BinaryNodeTree<ItemType>::inorder(ItemType &sum, BinaryNode<ItemType> *treePtr) const {
   if (treePtr != nullptr) { // TODO: check if I can do this by just if(treePtr)
     /* LEFT -> ROOT -> RIGHT */
-    inorder(visit, treePtr->getLeftChildPtr());
+    inorder(sum, treePtr->getLeftChildPtr());
     ItemType theItem = treePtr->getItem();
-    std::cout << treePtr->color << std::endl;
-    visit(theItem);
+    sum += theItem;
 
-    inorder(visit, treePtr->getRightChildPtr());
+    inorder(sum, treePtr->getRightChildPtr());
   }
 }
 

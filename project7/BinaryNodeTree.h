@@ -48,7 +48,7 @@ protected:
 
   // Recursive traversal helper methods:
   void preorder(void visit(ItemType&), BinaryNode<ItemType> *treePtr) const;
-  void inorder(void visit(ItemType&), BinaryNode<ItemType> *treePtr) const;
+  void inorder(ItemType&, BinaryNode<ItemType> *treePtr) const;
   void postorder(void visit(ItemType&), BinaryNode<ItemType> *treePtr) const;
 
 public:

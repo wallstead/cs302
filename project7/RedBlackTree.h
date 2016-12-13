@@ -1,11 +1,11 @@
 /**
  * @file RedBlackTree.h
  *
- * @brief Header file for the Binary Search Tree class
+ * @brief Header file for the Red Black Tree class
  *
  * @author Willis Allstead
  *
- * @details Specifies the members of the Binary Search Tree class
+ * @details Specifies the members of the Red Black Tree class
  *
  * @version 0.5
  *
@@ -50,7 +50,7 @@ public:
   // Public Traversals Section.
   //------------------------------------------------------------
   void preorderTrav(void visit(ItemType&)) const;
-  void inorderTrav(void visit(ItemType&)) const;
+  void inorderTrav(ItemType&) const;
   void postorderTrav(void visit(ItemType&)) const;
 }; // end RedBlackTree
 
