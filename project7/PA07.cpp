@@ -10,7 +10,7 @@
  */
 
 #include <iostream>
-#include "BinarySearchTree.h"
+#include "BinarySearchTreeRedBlack.h"
 
 using namespace std;
 
@@ -34,7 +34,7 @@ int main() {
   }
 
   /* Insert them into a binary search tree (BST1) */
-  BinarySearchTree<int> BST1;
+  BinarySearchTreeRedBlack<int> BST1;
 
   for (int i = 0; i < 100; i++) {
     BST1.add(randArr[i]);
@@ -55,7 +55,7 @@ int main() {
   }
 
   /* Insert them into another binary search tree (BST2) */
-  BinarySearchTree<int> BST2;
+  BinarySearchTreeRedBlack<int> BST2;
 
   for (int i = 0; i < 10; i++) {
     BST2.add(randArr[i]);

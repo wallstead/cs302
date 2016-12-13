@@ -14,6 +14,11 @@
 #ifndef BINARY_NODE_
 #define BINARY_NODE_
 
+enum color_t {
+  black,
+  red
+};
+
 template<class ItemType>
 class BinaryNode {
 private:
@@ -33,6 +38,8 @@ public:
   /** Tells if the node is a leaf
     @return Whether or not the node is a leaf of the tree. */
   bool isLeaf() const;
+
+  color_t color; // red or black
 
   BinaryNode<ItemType>* getLeftChildPtr() const;
   BinaryNode<ItemType>* getRightChildPtr() const;

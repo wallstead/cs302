@@ -78,7 +78,9 @@ void BinaryNodeTree<ItemType>::inorder(void visit(ItemType&), BinaryNode<ItemTyp
     /* LEFT -> ROOT -> RIGHT */
     inorder(visit, treePtr->getLeftChildPtr());
     ItemType theItem = treePtr->getItem();
+    std::cout << treePtr->color << std::endl;
     visit(theItem);
+
     inorder(visit, treePtr->getRightChildPtr());
   }
 }

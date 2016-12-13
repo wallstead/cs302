@@ -9,10 +9,13 @@
  *
  */
 
+
+
 template<class ItemType>
 BinaryNode<ItemType>::BinaryNode() {
   leftChildPtr = nullptr; // initialize both to null initially
   rightChildPtr = nullptr;
+  color = black; // is black by default (arbitrary)
 }
 
 template<class ItemType>
@@ -28,7 +31,7 @@ ItemType BinaryNode<ItemType>::getItem() const {
 template<class ItemType>
 bool BinaryNode<ItemType>::isLeaf() const {
   // if no children, return true
-  return ((leftChildPtr == nullptr) && (rightChildPtr == nullptr)); 
+  return ((leftChildPtr == nullptr) && (rightChildPtr == nullptr));
 }
 
 template<class ItemType>
